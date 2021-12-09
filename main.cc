@@ -31,9 +31,9 @@ int main() {
     ExprPtr exp4 = exp1 * exp1;
     cout << exp4 << endl;
 
-    // cout << "((x + 374) + ((x + 374)^2))  (expected)" << endl;
-    // ExprPtr exp3 = exp2 + (exp2 ^ num(2));
-    // cout << exp3 << endl;
+    cout << "((x + 374) + ((x + 374)^2))  (expected)" << endl;
+    ExprPtr exp3 = exp2 + (exp2 ^ num(2));
+    cout << exp3 << endl;
 
     // cout << "((42 + 374) + ((42 + 374)^2)) = 173472  (expected)" << endl;
     // cout << exp3->setVariables(values) << " = ";
