@@ -10,8 +10,8 @@ std::ostream& operator<<(std::ostream& o, const shared_ptr<Expr>& eptr) {
 }
 
 string Num::toString() const {
-    std::ostringstream s;
-    s << num_;
+    std::ostringstream s; // ostringstream is used to operate on strings
+    s << num_; // Instead of std::cout object, num_ was sent to s, an ostringstream object
     return s.str();
 }
 
@@ -32,18 +32,22 @@ shared_ptr<Expr> Var::clone() const {
 
 shared_ptr<Expr> Num::setVariables(const std::map<std::string, double>& values) const {
     // TODO: Implement setVariables
+    return std::make_shared<Num>(num_);
 }
 
 shared_ptr<Expr> Sum::setVariables(const std::map<std::string, double>& values) const {
     // TODO: Implement setVariables
+    return std::make_shared<Sum>(left_->setVariables(values), right_->setVariables(values));
 }
 
 shared_ptr<Expr> Var::setVariables(const std::map<std::string, double>& values) const {
     auto result = values.find(name_);
     if (result == values.end()) {
         // TODO: Finish implementing
+        return std::make_shared<Var>(name_);
     } else {
         // TODO: Finish implementing
+        return std::make_shared<Num>(result->second);
     }
 }
 
