@@ -18,8 +18,15 @@ string Num::toString() const {
 Sum::Sum(shared_ptr<Expr> left, shared_ptr<Expr> right)
         : left_(left), right_(right) {}
 
+Prod::Prod(shared_ptr<Expr> left, shared_ptr<Expr> right)
+        : left_(left), right_(right) {}
+
 shared_ptr<Expr> Sum::clone() const {
     return std::make_shared<Sum>(left_->clone(), right_->clone());
+}
+
+shared_ptr<Expr> Prod::clone() const {
+    return std::make_shared<Prod>(left_->clone(), right_->clone());
 }
 
 shared_ptr<Expr> Num::clone() const {
@@ -40,6 +47,11 @@ shared_ptr<Expr> Sum::setVariables(const std::map<std::string, double>& values) 
     return std::make_shared<Sum>(left_->setVariables(values), right_->setVariables(values));
 }
 
+shared_ptr<Expr> Prod::setVariables(const std::map<std::string, double>& values) const {
+    // TODO: Implement setVariables
+    return std::make_shared<Prod>(left_->setVariables(values), right_->setVariables(values));
+}
+
 shared_ptr<Expr> Var::setVariables(const std::map<std::string, double>& values) const {
     auto result = values.find(name_);
     if (result == values.end()) {
@@ -55,6 +67,10 @@ shared_ptr<Expr> operator+(shared_ptr<Expr> lhs, shared_ptr<Expr> rhs) {
     return std::make_shared<Sum>(lhs, rhs);
 }
 
+shared_ptr<Expr> operator*(shared_ptr<Expr> lhs, shared_ptr<Expr> rhs) {
+    return std::make_shared<Prod>(lhs, rhs);
+}
+
 double Var::evaluate() const {
     return NAN;
 }
@@ -63,6 +79,9 @@ double Num::evaluate() const {
 }
 double Sum::evaluate() const {
     return left_->evaluate() + right_->evaluate();
+}
+double Prod::evaluate() const {
+    return left_->evaluate() * right_->evaluate();
 }
 
 // TODO: Implement more functions here
