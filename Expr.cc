@@ -101,9 +101,12 @@ double Prod::evaluate() const {
 }
 double Pow::evaluate() const {
     double temp = 1;
+    /*
     for (int i = 0; i < right_->evaluate(); i++) {
         temp = temp * left_->evaluate();
     }
+    */
+    temp = pow(left_->evaluate(), right_->evaluate());
     return temp;
 }
 
