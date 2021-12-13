@@ -100,7 +100,11 @@ double Prod::evaluate() const {
     return left_->evaluate() * right_->evaluate();
 }
 double Pow::evaluate() const {
-    return left_->evaluate() * right_->evaluate();
+    double temp = 1;
+    for (int i = 0; i < right_->evaluate(); i++) {
+        temp = temp * left_->evaluate();
+    }
+    return temp;
 }
 
 // TODO: Implement more functions here
