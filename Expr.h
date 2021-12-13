@@ -100,7 +100,7 @@ class Pow : public Expr {
     shared_ptr<Expr> clone() const;
     shared_ptr<Expr> setVariables(const std::map<std::string, double>& values) const;
     string toString() const { 
-        return "(" + left_->toString() + " ^ " + right_->toString() + ")";
+        return "(" + left_->toString() + "^" + right_->toString() + ")";
     }
     double evaluate() const;
  private:
