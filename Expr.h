@@ -95,6 +95,7 @@ shared_ptr<Expr> operator*(shared_ptr<Expr> lhs, shared_ptr<Expr> rhs);
 // TODO: Implement the mathematical power (e.g. x^2)
 // For the toString(), output in the format of (left^right)
 class Pow : public Expr {
+   public:
    Pow(shared_ptr<Expr> left, shared_ptr<Expr> right);
     shared_ptr<Expr> clone() const;
     shared_ptr<Expr> setVariables(const std::map<std::string, double>& values) const;
